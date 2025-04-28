@@ -2,7 +2,7 @@
 
 ### 1. Conceito do Sistema
 
-O sistema "Gerenciador de Biblioteca de Mídia Digital" permite aos usuários catalogar, organizar, pesquisar e gerenciar seus arquivos de áudio digitais pessoais, como músicas, episódios de podcast e capítulos de audiobook. Ele oferece funcionalidades para adicionar novas mídias, criar e gerenciar playlists, buscar itens na biblioteca e persistir o estado da biblioteca em arquivos para uso futuro. O sistema é operado através de um menu de console interativo.
+O sistema "Gerenciador de Biblioteca de Mídia Digital" permite aos usuários catalogar, organizar, pesquisar e gerenciar seus arquivos de áudio digitais pessoais, como músicas, episódios de podcast e capítulos de audiobook. Ele oferece funcionalidades para adicionar novas mídias, criar e gerenciar playlists, buscar itens na midia e persistir o estado da midia em arquivos para uso futuro. O sistema é operado através de um menu de console interativo.
 
 ### 2. Atendimento aos Requisitos do Trabalho Prático 02
 
@@ -28,7 +28,7 @@ Vamos verificar cada requisito do PDF:
 7.  **2 Interfaces:**
     *   `IReproduzivel` (com método `play()`)
     *   `IFavoritavel` (com métodos `marcarFavorito(boolean)` e `isFavorito()`)
-    *   *Extra (Boas Práticas/SOLID):* `IBibliotecaService`, `IPersistenciaService`. Total de 4 interfaces. OK.
+    *   *Extra (Boas Práticas/SOLID):* `IBibliotecaService`, `IPersistenciaService`. Total de 4 midia.interfaces. OK.
 8.  **2 Sobrecargas de Métodos (não construtores):**
     *   Em `BibliotecaService`: `buscarMidia(String titulo)` e `buscarMidia(String termoBusca, TipoMidia tipo)`. OK. (Ou alternativas como `adicionarMidia(Musica m)` e `adicionarMidia(PodcastEpisodio p)`).
 9.  **4 Sobrescritas de Métodos:**
@@ -39,12 +39,12 @@ Vamos verificar cada requisito do PDF:
 10. **Implementação em Java:** OK.
 11. **Conceitos de POO:** Herança, Polimorfismo, Encapsulamento, Abstração, Interfaces. OK.
 12. **Formatar e Comentar:** OK (a ser feito na implementação).
-13. **Boas Práticas:** Uso de interfaces, `final`, `private`, tratamento de exceções específico, `Serializable`, `hashCode`/`equals` (importante para coleções e evitar duplicatas), principios SOLID. OK.
+13. **Boas Práticas:** Uso de midia.interfaces, `final`, `private`, tratamento de exceções específico, `Serializable`, `hashCode`/`equals` (importante para coleções e evitar duplicatas), principios SOLID. OK.
 14. **Classes em Arquivos Separados:** OK.
 15. **Menu Interativo:** Implementado pela classe `MenuUI`. OK.
-16. **Módulo de Salvar/Carregar (Persistência):** Implementado pela classe `PersistenciaService` utilizando serialização Java para salvar/carregar o objeto `Biblioteca` em um arquivo binário (`biblioteca.dat`). OK.
-17. **Carregamento Automático ao Iniciar:** A classe `Main` orquestra o carregamento dos dados via `PersistenciaService` antes de iniciar o `MenuUI`. OK.
-18. **Carga Inicial via Arquivo (NÃO CÓDIGO):** O sistema deve ser executado uma vez, dados adicionados, e o arquivo `biblioteca.dat` gerado deve ser incluído na entrega. O código *não* terá dados "hardcoded" para a carga inicial. OK.
+16. **Módulo de Salvar/Carregar (Persistência):** Implementado pela classe `PersistenciaService` utilizando serialização Java para salvar/carregar o objeto `Biblioteca` em um arquivo binário (`midia.dat`). OK.
+17. **Carregamento Automático ao Iniciar:** A classe `midia.Main` orquestra o carregamento dos dados via `PersistenciaService` antes de iniciar o `MenuUI`. OK.
+18. **Carga Inicial via Arquivo (NÃO CÓDIGO):** O sistema deve ser executado uma vez, dados adicionados, e o arquivo `midia.dat` gerado deve ser incluído na entrega. O código *não* terá dados "hardcoded" para a carga inicial. OK.
 19. **Tratamento de Exceções:**
     *   **Mínimo 3 Exceções Específicas:**
         1.  `MidiaNaoEncontradaException` (Erro ao buscar/remover mídia inexistente).
@@ -61,23 +61,23 @@ Vamos verificar cada requisito do PDF:
     *   `ArquivoMidia` e subclasses: Representam os dados e comportamento intrínseco de cada tipo de mídia.
     *   `Playlist`: Gerencia a coleção de mídias de uma playlist específica.
     *   `Biblioteca`: Contém as coleções de mídias e playlists (estado da aplicação).
-    *   `BibliotecaService`: Orquestra as operações na biblioteca (lógica de negócio).
+    *   `BibliotecaService`: Orquestra as operações na midia (lógica de negócio).
     *   `PersistenciaService`: Responsável unicamente por salvar e carregar o estado da `Biblioteca`.
     *   `MenuUI`: Responsável unicamente pela interação com o usuário (apresentação e captura de entrada).
-    *   `Main`: Ponto de entrada, inicialização e coordenação inicial.
+    *   `midia.Main`: Ponto de entrada, inicialização e coordenação inicial.
 *   **O (Open/Closed Principle - Princípio Aberto/Fechado):**
-    *   Adicionar um novo tipo de mídia (ex: `VideoClipe`) exigiria criar uma nova classe herdando `ArquivoMidia` e implementar seus métodos. As classes `BibliotecaService` e `MenuUI` precisariam de modificações mínimas (graças ao polimorfismo e talvez adição de opções no menu), mas o núcleo da lógica existente permaneceria inalterado. O uso de interfaces (`IBibliotecaService`, `IPersistenciaService`) também facilita a extensão ou substituição de implementações.
+    *   Adicionar um novo tipo de mídia (ex: `VideoClipe`) exigiria criar uma nova classe herdando `ArquivoMidia` e implementar seus métodos. As classes `BibliotecaService` e `MenuUI` precisariam de modificações mínimas (graças ao polimorfismo e talvez adição de opções no menu), mas o núcleo da lógica existente permaneceria inalterado. O uso de midia.interfaces (`IBibliotecaService`, `IPersistenciaService`) também facilita a extensão ou substituição de implementações.
 *   **L (Liskov Substitution Principle - Princípio da Substituição de Liskov):**
     *   Qualquer instância de `Musica`, `PodcastEpisodio` ou `AudiobookCapitulo` pode ser usada onde um `ArquivoMidia` é esperado (ex: em listas `List<ArquivoMidia>` dentro de `Playlist` ou `Biblioteca`), sem quebrar a lógica que utiliza `ArquivoMidia`. Os métodos sobrescritos (`play`, `getDetalhesExibicao`, `toString`) mantêm um contrato comportamental consistente.
 *   **I (Interface Segregation Principle - Princípio da Segregação de Interfaces):**
-    *   As interfaces (`IReproduzivel`, `IFavoritavel`, `IBibliotecaService`, `IPersistenciaService`) são pequenas e focadas em funcionalidades específicas. Clientes (classes que usam as interfaces) não são forçados a depender de métodos que não utilizam.
+    *   As midia.interfaces (`IReproduzivel`, `IFavoritavel`, `IBibliotecaService`, `IPersistenciaService`) são pequenas e focadas em funcionalidades específicas. Clientes (classes que usam as midia.interfaces) não são forçados a depender de métodos que não utilizam.
 *   **D (Dependency Inversion Principle - Princípio da Inversão de Dependência):**
-    *   Módulos de alto nível (`MenuUI`, `Main`) dependem de abstrações (`IBibliotecaService`, `IPersistenciaService`) e não de implementações concretas (`BibliotecaService`, `PersistenciaService`).
+    *   Módulos de alto nível (`MenuUI`, `midia.Main`) dependem de abstrações (`IBibliotecaService`, `IPersistenciaService`) e não de implementações concretas (`BibliotecaService`, `PersistenciaService`).
     *   Módulos de baixo nível (`BibliotecaService`, `PersistenciaService`) também dependem de abstrações (embora neste caso `PersistenciaService` possa operar diretamente sobre a classe concreta `Biblioteca` para serialização, ou poderia receber uma interface `IBibliotecaData` se quiséssemos abstrair ainda mais). A injeção de dependência (passando instâncias de serviços via construtor ou métodos) seria a forma de implementar isso.
 
 ### 4. Estrutura do Projeto (Classes e Interfaces)
 
-*   **`com.biblioteca.midia.entidades`** (Pacote para modelos de dados)
+*   **`com.midia.midia.entidades`** (Pacote para modelos de dados)
     *   **`ArquivoMidia` (abstract class):**
         *   Atributos: `id` (String/UUID, final), `titulo` (String), `duracaoSegundos` (int), `caminhoArquivo` (String), `formato` (String), `favorito` (boolean).
         *   Métodos: Construtor, getters, `marcarFavorito(boolean)`, `isFavorito()`, `toString()` (override), `hashCode()` (override), `equals()` (override).
@@ -107,7 +107,7 @@ Vamos verificar cada requisito do PDF:
         *   Métodos: Construtor, getters (retornando cópias defensivas ou vistas não modificáveis das coleções), métodos para adicionar/remover/obter mídias e playlists *internamente* (usados pelo `BibliotecaService`).
         *   Implementa: `Serializable`.
 
-*   **`com.biblioteca.midia.interfaces`** (Pacote para interfaces)
+*   **`com.midia.midia.midia.interfaces`** (Pacote para midia.interfaces)
     *   **`IReproduzivel` (interface):**
         *   Métodos: `void play();`
     *   **`IFavoritavel` (interface):**
@@ -115,31 +115,31 @@ Vamos verificar cada requisito do PDF:
     *   **`IBibliotecaService` (interface):**
         *   Métodos: `void adicionarMusica(...)`, `void adicionarPodcast(...)`, `void adicionarAudiobook(...)`, `ArquivoMidia buscarMidia(String id)`, `List<ArquivoMidia> buscarMidiaPorTitulo(String titulo)`, `List<ArquivoMidia> buscarMidia(String termoBusca, TipoMidia tipo)`, `List<ArquivoMidia> listarTodasMidias()`, `List<Musica> listarMusicas()`, `List<PodcastEpisodio> listarPodcasts()`, ... , `void criarPlaylist(String nome, String descricao)`, `void adicionarMidiaPlaylist(String idPlaylist, String idMidia)`, `void removerMidiaPlaylist(String idPlaylist, String idMidia)`, `Playlist buscarPlaylist(String id)`, `List<Playlist> listarPlaylists()`, `void marcarMidiaComoFavorita(String idMidia, boolean status)`, `List<ArquivoMidia> listarFavoritos()`, `void salvarBiblioteca()`.
     *   **`IPersistenciaService` (interface):**
-        *   Métodos: `void salvar(Biblioteca biblioteca, String caminhoArquivo) throws PersistenciaException;`, `Biblioteca carregar(String caminhoArquivo) throws PersistenciaException;`
+        *   Métodos: `void salvar(Biblioteca midia, String caminhoArquivo) throws PersistenciaException;`, `Biblioteca carregar(String caminhoArquivo) throws PersistenciaException;`
 
-*   **`com.biblioteca.midia.servicos`** (Pacote para serviços/lógica)
+*   **`com.midia.midia.servicos`** (Pacote para serviços/lógica)
     *   **`BibliotecaService` (class):**
-        *   Atributos: `biblioteca` (Biblioteca), `persistenciaService` (IPersistenciaService), `caminhoArquivo` (String).
+        *   Atributos: `midia` (Biblioteca), `persistenciaService` (IPersistenciaService), `caminhoArquivo` (String).
         *   Métodos: Construtor (recebe `IPersistenciaService`, `Biblioteca`, `caminhoArquivo`), implementa todos os métodos de `IBibliotecaService`. Realiza validações, lança exceções (`MidiaNaoEncontradaException`, `PlaylistNaoEncontradaException`, `MidiaDuplicadaException`). Contém as sobrecargas de `buscarMidia`. Chama `persistenciaService.salvar()` após operações de modificação.
     *   **`PersistenciaService` (class):**
         *   Métodos: Implementa `IPersistenciaService`. Usa `ObjectOutputStream` e `ObjectInputStream` para serializar/desserializar o objeto `Biblioteca`. Lança `PersistenciaException` (wrapper para `IOException`, `ClassNotFoundException`, etc.).
 
-*   **`com.biblioteca.midia.ui`** (Pacote para interface com usuário)
+*   **`com.midia.midia.ui`** (Pacote para interface com usuário)
     *   **`MenuUI` (class):**
         *   Atributos: `bibliotecaService` (IBibliotecaService), `scanner` (Scanner).
         *   Métodos: Construtor (recebe `IBibliotecaService`), `exibirMenuPrincipal()`, `processarOpcao(int)`, `lerEntradaUsuario()`, métodos auxiliares para cada funcionalidade (ex: `uiAdicionarMusica()`, `uiListarMidias()`, `uiBuscarMidia()`). Trata `InputMismatchException` e lança/propaga `EntradaInvalidaException`. Interage com `BibliotecaService`.
 
-*   **`com.biblioteca.midia.excecoes`** (Pacote para exceções customizadas)
+*   **`com.midia.midia.excecoes`** (Pacote para exceções customizadas)
     *   `MidiaNaoEncontradaException` (extends Exception)
     *   `PlaylistNaoEncontradaException` (extends Exception)
     *   `EntradaInvalidaException` (extends Exception)
     *   `MidiaDuplicadaException` (extends Exception)
     *   `PersistenciaException` (extends Exception)
 
-*   **`com.biblioteca.midia`** (Pacote raiz)
-    *   **`Main` (class):**
+*   **`com.midia.midia`** (Pacote raiz)
+    *   **`midia.Main` (class):**
         *   Método `main(String[] args)`:
-            1.  Define `CAMINHO_ARQUIVO = "biblioteca.dat"`.
+            1.  Define `CAMINHO_ARQUIVO = "midia.dat"`.
             2.  Cria instância de `PersistenciaService`.
             3.  Tenta carregar a `Biblioteca` usando `persistenciaService.carregar()`.
                 *   Se falhar (ex: `PersistenciaException` por arquivo não encontrado na primeira execução), cria uma `Biblioteca` vazia.
@@ -147,7 +147,7 @@ Vamos verificar cada requisito do PDF:
             5.  Cria instância de `MenuUI` passando o `bibliotecaService`.
             6.  Inicia o loop do menu chamando `menuUI.exibirMenuPrincipal()`.
 
-*   **`com.biblioteca.midia.util`** (Pacote opcional para utilitários)
+*   **`com.midia.midia.util`** (Pacote opcional para utilitários)
     *   **`TipoMidia` (enum):** MUSICA, PODCAST, AUDIOBOOK (pode ser útil para buscas filtradas).
     *   **`GeradorID` (class):** Classe utilitária (ex: com método estático) para gerar IDs únicos (ex: `UUID.randomUUID().toString()`).
 
@@ -262,7 +262,7 @@ classDiagram
     }
 
     class BibliotecaService {
-        -Biblioteca biblioteca
+        -Biblioteca midia
         -IPersistenciaService persistenciaService
         -String caminhoArquivo
         +...(implementa IBibliotecaService)
@@ -286,12 +286,12 @@ classDiagram
     }
     MenuUI --> IBibliotecaService : usa
 
-    class Main {
+    class midia.Main {
         +main(String[] args) void
     }
-    Main --> MenuUI : cria/usa
-    Main --> BibliotecaService : cria
-    Main --> PersistenciaService : cria/usa
+    midia.Main --> MenuUI : cria/usa
+    midia.Main --> BibliotecaService : cria
+    midia.Main --> PersistenciaService : cria/usa
 
     ' Exceções (não usualmente mostradas em diagramas de classe principais)
     class MidiaNaoEncontradaException
@@ -315,12 +315,12 @@ classDiagram
 ### 6. Estratégia de Persistência
 
 *   **Tecnologia:** Serialização de Objetos Java.
-*   **Arquivo:** Um único arquivo binário (ex: `biblioteca.dat`).
+*   **Arquivo:** Um único arquivo binário (ex: `midia.dat`).
 *   **Objeto Salvo:** A instância da classe `Biblioteca`, que contém todas as mídias e playlists.
 *   **Processo:**
     *   **Salvar:** A classe `PersistenciaService` utiliza `FileOutputStream` e `ObjectOutputStream` para escrever o objeto `Biblioteca` no arquivo. Chamado pelo `BibliotecaService` após operações que modificam o estado.
-    *   **Carregar:** A classe `PersistenciaService` utiliza `FileInputStream` e `ObjectInputStream` para ler o objeto `Biblioteca` do arquivo. Chamado pela classe `Main` na inicialização.
-*   **Tratamento de Erros:** A `PersistenciaService` encapsula `IOExceptions`, `ClassNotFoundException`, etc., em uma `PersistenciaException` customizada para ser tratada na `Main` (ex: iniciar com biblioteca vazia se o arquivo não for encontrado).
+    *   **Carregar:** A classe `PersistenciaService` utiliza `FileInputStream` e `ObjectInputStream` para ler o objeto `Biblioteca` do arquivo. Chamado pela classe `midia.Main` na inicialização.
+*   **Tratamento de Erros:** A `PersistenciaService` encapsula `IOExceptions`, `ClassNotFoundException`, etc., em uma `PersistenciaException` customizada para ser tratada na `midia.Main` (ex: iniciar com midia vazia se o arquivo não for encontrado).
 *   **Importante:** Todas as classes que fazem parte do objeto `Biblioteca` (incluindo `ArquivoMidia` e suas subclasses, `Playlist`) devem implementar a interface `java.io.Serializable`.
 
 ### 7. Estratégia de Tratamento de Exceções
@@ -332,7 +332,7 @@ classDiagram
     *   `MenuUI`: Lança (ou trata internamente e relança) `EntradaInvalidaException` para input malformado do usuário (ex: `InputMismatchException` do `Scanner`).
 *   **Captura:**
     *   `MenuUI`: Captura exceções lançadas pelo `BibliotecaService` e `EntradaInvalidaException` para exibir mensagens de erro amigáveis ao usuário, sem terminar o programa abruptamente.
-    *   `Main`: Captura `PersistenciaException` durante o carregamento inicial para lidar com a ausência do arquivo de dados.
+    *   `midia.Main`: Captura `PersistenciaException` durante o carregamento inicial para lidar com a ausência do arquivo de dados.
 *   **Evitar `catch (Exception e)`:** Usar blocos `catch` específicos para cada tipo de exceção esperada, permitindo tratamento diferenciado e mais robusto.
 
 ### 8. Estrutura do Menu (Exemplo)
@@ -381,11 +381,11 @@ Voltar [0]
 
 ### 9. Instruções para Geração da Carga Inicial
 
-1.  Compile e execute o programa (`Main.java`).
+1.  Compile e execute o programa (`midia.Main.java`).
 2.  Utilize as opções do menu para adicionar alguns exemplos de Músicas, Podcasts e Audiobooks.
 3.  Crie pelo menos uma Playlist e adicione algumas mídias a ela.
 4.  Marque algumas mídias como favoritas.
-5.  Escolha a opção "Salvar e Sair" no menu principal. Isso criará/atualizará o arquivo `biblioteca.dat` no diretório de execução.
-6.  **Inclua este arquivo `biblioteca.dat` junto com os arquivos `.java` no arquivo `.zip` final da entrega.** O sistema, ao ser executado pelo avaliador, carregará automaticamente estes dados.
+5.  Escolha a opção "Salvar e Sair" no menu principal. Isso criará/atualizará o arquivo `midia.dat` no diretório de execução.
+6.  **Inclua este arquivo `midia.dat` junto com os arquivos `.java` no arquivo `.zip` final da entrega.** O sistema, ao ser executado pelo avaliador, carregará automaticamente estes dados.
 
 Esta estrutura detalhada e o design proposto atendem a todos os requisitos do PDF, incorporando boas práticas e os princípios SOLID para criar um sistema mais robusto, manutenível e extensível.
