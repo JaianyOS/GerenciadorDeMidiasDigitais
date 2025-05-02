@@ -1,8 +1,12 @@
 package midia.models;
 
+import midia.interfaces.IFavoritavel;
+import midia.interfaces.IReproduzivel;
+
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class ArquivoMidia {
+public abstract class ArquivoMidia implements IReproduzivel, IFavoritavel,Serializable {
     private String id;
     private String titulo;
     private int duracaoSegundos;
@@ -19,11 +23,23 @@ public abstract class ArquivoMidia {
         this.favorito = favorito;
     }
 
+    // implementação da interface IFavoritavel
+
+    @Override
     public boolean isFavorito() {
         return favorito;
     }
 
-    public void setFavorito(boolean favorito) {
+    @Override
+    public void marcarFavorito(boolean favorito) {
         this.favorito = favorito;
     }
+
+    // métodos abstratos
+
+    // implementação da interface IReproduzivel
+    @Override
+    public abstract void play();
+
+    public abstract String getDetalhesExibicao();
 }
