@@ -23,6 +23,46 @@ public abstract class ArquivoMidia implements IReproduzivel, IFavoritavel,Serial
         this.favorito = favorito;
     }
 
+    public String getFormato() {
+        return formato;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
+    }
+
+    public String getCaminhoArquivo() {
+        return caminhoArquivo;
+    }
+
+    public void setCaminhoArquivo(String caminhoArquivo) {
+        this.caminhoArquivo = caminhoArquivo;
+    }
+
+    public int getDuracaoSegundos() {
+        return duracaoSegundos;
+    }
+
+    public void setDuracaoSegundos(int duracaoSegundos) {
+        this.duracaoSegundos = duracaoSegundos;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     // implementação da interface IFavoritavel
 
     @Override

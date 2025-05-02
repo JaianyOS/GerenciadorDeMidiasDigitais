@@ -45,4 +45,41 @@ public class Musica extends ArquivoMidia {
     public void setAnoLancamento(int anoLancamento) {
         this.anoLancamento = anoLancamento;
     }
+
+    // implementaçao dos metodos abstratos herdados da classe mae
+
+    @Override
+    public String getDetalhesExibicao() {
+        return String.format("MUSICA   | Título: %s | Artista: %s | Álbum: %s (%d) | Duração: %s | Favorito: %s",
+                getTitulo(),
+                artista,
+                album,
+                anoLancamento,
+                formatarDuracao(getDuracaoSegundos()),
+                isFavorito() ? "SIM" : "NÃO");
+    }
+
+    @Override
+    public void play() {
+        System.out.printf("MÚSICA || ▶️ %s | %s (%s)...%n",
+                getTitulo(),
+                artista,
+                formatarDuracao(getDuracaoSegundos())
+        );
+    }
+
+    // metodo auxiliar privado só pra formatar a duracao direitinho
+
+    private String formatarDuracao(int totalSegundos) {
+        if (totalSegundos < 0) return "00:00";
+
+        long horas = totalSegundos / 3600;
+        long minutos = (totalSegundos % 3600) / 60;
+        long segundos = totalSegundos % 60;
+
+        if (horas > 0)
+            return String.format("%02d:%02d:%02d", horas, minutos, segundos);
+        else
+            return String.format("%02d:%02d", minutos, segundos);
+    }
 }
