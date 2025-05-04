@@ -1,9 +1,13 @@
 package midia.models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Biblioteca {
+public class Biblioteca implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private Map<String, ArquivoMidia> todasAsMidias;
     private Map<String, Playlist> todasAsPlaylists;
 
