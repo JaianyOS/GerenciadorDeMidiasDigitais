@@ -6,12 +6,13 @@ import midia.util.TipoMidia;
 import java.util.List;
 
 public interface IBibliotecaService {
-    // Adicionar mídias
+
+    // métodos pra adicionar mídias
     void adicionarMusica(Musica m) throws MidiaDuplicadaException, PersistenciaException;
     void adicionarPodcast(PodcastEpisodio p) throws MidiaDuplicadaException, PersistenciaException;
     void adicionarAudiobook(AudiobookCapitulo a) throws MidiaDuplicadaException, PersistenciaException;
 
-    // Buscar mídia
+    // métodos p buscar mídias
     ArquivoMidia buscarMidia(String id) throws MidiaNaoEncontradaException;
     List<ArquivoMidia> buscarMidiaPorTitulo(String titulo);
     List<ArquivoMidia> buscarMidia(String termoBusca, TipoMidia tipo);

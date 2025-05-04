@@ -1,5 +1,5 @@
 package midia.ui.submenus;
 
-public interface Submenu {
+public interface ISubmenu {
     void exibir();
 }

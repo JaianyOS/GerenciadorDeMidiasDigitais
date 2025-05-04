@@ -3,11 +3,11 @@ package midia.ui.submenus;
 import midia.interfaces.IBibliotecaService;
 import java.util.Scanner;
 
-public class SubmenuFavoritos implements Submenu {
+public class ISubmenuFavoritos implements ISubmenu {
     private final IBibliotecaService bibliotecaService;
     private final Scanner scanner;
 
-    public SubmenuFavoritos(IBibliotecaService bibliotecaService, Scanner scanner) {
+    public ISubmenuFavoritos(IBibliotecaService bibliotecaService, Scanner scanner) {
         this.bibliotecaService = bibliotecaService;
         this.scanner = scanner;
     }

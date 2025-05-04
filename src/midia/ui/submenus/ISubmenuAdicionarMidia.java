@@ -8,11 +8,11 @@ import midia.models.AudiobookCapitulo;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class SubmenuAdicionarMidia implements Submenu {
+public class ISubmenuAdicionarMidia implements ISubmenu {
     private final IBibliotecaService bibliotecaService;
     private final Scanner scanner;
 
-    public SubmenuAdicionarMidia(IBibliotecaService bibliotecaService, Scanner scanner) {
+    public ISubmenuAdicionarMidia(IBibliotecaService bibliotecaService, Scanner scanner) {
         this.bibliotecaService = bibliotecaService;
         this.scanner = scanner;
     }

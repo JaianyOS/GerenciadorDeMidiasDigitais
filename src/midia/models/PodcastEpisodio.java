@@ -17,6 +17,8 @@ public class PodcastEpisodio extends ArquivoMidia {
         this.descricaoResumida = descricaoResumida;
     }
 
+    // implementacao dos metodos abstratos
+
     @Override
     public void play() {
         System.out.printf("▶️ Tocando podcast: %s - Episódio %d: %s%n", nomePodcast, numeroEpisodio, getTitulo());

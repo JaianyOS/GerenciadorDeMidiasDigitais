@@ -105,8 +105,8 @@ public class MenuUI {
         System.out.print("Ano de lançamento: ");
         int ano = Integer.parseInt(scanner.nextLine());
 
-        Musica m = new Musica(null, titulo, duracao, caminho, formato, false, artista, album, genero, ano);
-        bibliotecaService.adicionarMusica(m);
+        Musica musica = new Musica(null, titulo, duracao, caminho, formato, false, artista, album, genero, ano);
+        bibliotecaService.adicionarMusica(musica);
         System.out.println("Música adicionada com sucesso!");
     }
 

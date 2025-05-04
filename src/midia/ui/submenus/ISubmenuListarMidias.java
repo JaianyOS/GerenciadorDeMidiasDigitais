@@ -3,11 +3,11 @@ package midia.ui.submenus;
 import midia.interfaces.IBibliotecaService;
 import java.util.Scanner;
 
-public class SubmenuListarMidias implements Submenu {
+public class ISubmenuListarMidias implements ISubmenu {
     private final IBibliotecaService bibliotecaService;
     private final Scanner scanner;
 
-    public SubmenuListarMidias(IBibliotecaService bibliotecaService, Scanner scanner) {
+    public ISubmenuListarMidias(IBibliotecaService bibliotecaService, Scanner scanner) {
         this.bibliotecaService = bibliotecaService;
         this.scanner = scanner;
     }

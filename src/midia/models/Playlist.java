@@ -45,12 +45,4 @@ public class Playlist implements Serializable {
     public List<ArquivoMidia> getMidias() {
         return midias;
     }
-
-    public void adicionarMidia(ArquivoMidia midia) {
-        midias.add(midia);
-    }
-
-    public void removerMidia(ArquivoMidia midia) {
-        midias.remove(midia);
-    }
 }

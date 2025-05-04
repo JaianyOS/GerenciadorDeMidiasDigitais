@@ -7,11 +7,11 @@ import midia.util.TipoMidia;
 import java.util.List;
 import java.util.Scanner;
 
-public class SubmenuBuscarMidia implements Submenu {
+public class ISubmenuBuscarMidia implements ISubmenu {
     private final IBibliotecaService bibliotecaService;
     private final Scanner scanner;
 
-    public SubmenuBuscarMidia(IBibliotecaService bibliotecaService, Scanner scanner) {
+    public ISubmenuBuscarMidia(IBibliotecaService bibliotecaService, Scanner scanner) {
         this.bibliotecaService = bibliotecaService;
         this.scanner = scanner;
     }
