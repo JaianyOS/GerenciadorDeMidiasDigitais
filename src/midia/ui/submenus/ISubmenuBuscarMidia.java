@@ -34,7 +34,7 @@ public class ISubmenuBuscarMidia implements ISubmenu {
                 System.out.println("Opção inválida!");
         }
     }
-
+//responsavel por achar a midia adicionada.
     private void buscarPorTitulo() {
         System.out.print("Digite parte do título: ");
         String titulo = scanner.nextLine();

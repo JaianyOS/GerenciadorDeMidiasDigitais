@@ -7,6 +7,9 @@ import midia.util.TipoMidia;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Implementação dos serviços da biblioteca de mídias.
+ */
 public class BibliotecaService implements IBibliotecaService {
     private final Biblioteca biblioteca;
     private final IPersistenciaService persistenciaService;
@@ -29,6 +32,13 @@ public class BibliotecaService implements IBibliotecaService {
     }
 
     @Override
+    public void adicionarMusica(List<Musica> musicas) throws MidiaDuplicadaException, PersistenciaException {
+        for (Musica m : musicas) {
+            adicionarMusica(m);
+        }
+    }
+
+    @Override
     public void adicionarPodcast(PodcastEpisodio p) throws MidiaDuplicadaException, PersistenciaException {
         if (biblioteca.getTodasAsMidias().containsKey(p.getId())) {
             throw new MidiaDuplicadaException("Podcast já cadastrado!");
@@ -38,12 +48,26 @@ public class BibliotecaService implements IBibliotecaService {
     }
 
     @Override
+    public void adicionarPodcast(List<PodcastEpisodio> podcasts) throws MidiaDuplicadaException, PersistenciaException {
+        for (PodcastEpisodio p : podcasts) {
+            adicionarPodcast(p);
+        }
+    }
+
+    @Override
     public void adicionarAudiobook(AudiobookCapitulo a) throws MidiaDuplicadaException, PersistenciaException {
         if (biblioteca.getTodasAsMidias().containsKey(a.getId())) {
             throw new MidiaDuplicadaException("Audiobook já cadastrado!");
         }
         biblioteca.adicionarMidia(a);
         salvarBiblioteca();
+    }
+
+    @Override
+    public void adicionarAudiobook(List<AudiobookCapitulo> audiobooks) throws MidiaDuplicadaException, PersistenciaException {
+        for (AudiobookCapitulo a : audiobooks) {
+            adicionarAudiobook(a);
+        }
     }
 
     // Buscar mídia por ID
@@ -76,6 +100,17 @@ public class BibliotecaService implements IBibliotecaService {
                     }
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ArquivoMidia> buscarMidia(List<String> ids) throws MidiaNaoEncontradaException {
+        List<ArquivoMidia> result = new ArrayList<>();
+        for (String id : ids) {
+            ArquivoMidia m = biblioteca.getTodasAsMidias().get(id);
+            if (m == null) throw new MidiaNaoEncontradaException("Mídia não encontrada: " + id);
+            result.add(m);
+        }
+        return result;
     }
 
     // Listar todas as mídias
@@ -123,23 +158,54 @@ public class BibliotecaService implements IBibliotecaService {
     public void adicionarMidiaPlaylist(String idPlaylist, String idMidia)
             throws PlaylistNaoEncontradaException, MidiaNaoEncontradaException, PersistenciaException {
         Playlist p = biblioteca.getTodasAsPlaylists().get(idPlaylist);
-        if (p == null) throw new PlaylistNaoEncontradaException("Playlist não encontrada!");
+        if (p == null)
+            throw new PlaylistNaoEncontradaException("Playlist não encontrada!");
+
         ArquivoMidia m = biblioteca.getTodasAsMidias().get(idMidia);
-        if (m == null) throw new MidiaNaoEncontradaException("Mídia não encontrada!");
-        if (!p.getMidias().add(m)){
+        if (m == null)
+            throw new MidiaNaoEncontradaException("Mídia não encontrada: " + idMidia);
+
+        if (!p.getMidias().contains(m)) {
             p.getMidias().add(m);
-            salvarBiblioteca();
         }
+        salvarBiblioteca();
+    }
+
+    @Override
+    public void adicionarMidiaPlaylist(String idPlaylist, List<String> idsMidia)
+            throws PlaylistNaoEncontradaException, MidiaNaoEncontradaException, PersistenciaException {
+        Playlist p = biblioteca.getTodasAsPlaylists().get(idPlaylist);
+        if (p == null)
+            throw new PlaylistNaoEncontradaException("Playlist não encontrada!");
+
+        for (String idMidia : idsMidia) {
+            ArquivoMidia m = biblioteca.getTodasAsMidias().get(idMidia);
+            if (m == null)
+                throw new MidiaNaoEncontradaException("Mídia não encontrada: " + idMidia);
+            if (!p.getMidias().contains(m)) {
+                p.getMidias().add(m);
+            }
+        }
+        salvarBiblioteca();
     }
 
     @Override
     public void removerMidiaPlaylist(String idPlaylist, String idMidia)
             throws PlaylistNaoEncontradaException, MidiaNaoEncontradaException, PersistenciaException {
+        removerMidiaPlaylist(idPlaylist, Arrays.asList(idMidia));
+    }
+
+    @Override
+    public void removerMidiaPlaylist(String idPlaylist, List<String> idsMidia)
+            throws PlaylistNaoEncontradaException, MidiaNaoEncontradaException, PersistenciaException {
         Playlist p = biblioteca.getTodasAsPlaylists().get(idPlaylist);
         if (p == null) throw new PlaylistNaoEncontradaException("Playlist não encontrada!");
-        ArquivoMidia m = biblioteca.getTodasAsMidias().get(idMidia);
-        if (m == null) throw new MidiaNaoEncontradaException("Mídia não encontrada!");
-        p.getMidias().remove(m);
+
+        for (String idMidia : idsMidia) {
+            ArquivoMidia m = biblioteca.getTodasAsMidias().get(idMidia);
+            if (m == null) throw new MidiaNaoEncontradaException("Mídia não encontrada: " + idMidia);
+            p.getMidias().remove(m);
+        }
         salvarBiblioteca();
     }
 
@@ -163,6 +229,14 @@ public class BibliotecaService implements IBibliotecaService {
         if (m == null) throw new MidiaNaoEncontradaException("Mídia não encontrada!");
         m.marcarFavorito(status);
         salvarBiblioteca();
+    }
+
+    @Override
+    public void marcarMidiaComoFavorita(List<String> idsMidia, boolean status)
+            throws MidiaNaoEncontradaException, PersistenciaException {
+        for (String id : idsMidia) {
+            marcarMidiaComoFavorita(id, status);
+        }
     }
 
     @Override

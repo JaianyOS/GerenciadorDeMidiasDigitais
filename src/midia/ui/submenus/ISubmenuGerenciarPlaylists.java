@@ -11,7 +11,7 @@ public class ISubmenuGerenciarPlaylists implements ISubmenu {
         this.bibliotecaService = bibliotecaService;
         this.scanner = scanner;
     }
-
+//fazer manutenção das midias, criando playlist e adicionando midias na playlist
     @Override
     public void exibir() {
         int opcao;

@@ -16,7 +16,7 @@ public class ISubmenuAdicionarMidia implements ISubmenu {
         this.bibliotecaService = bibliotecaService;
         this.scanner = scanner;
     }
-
+//decidir se vai adicionar uma musica, podcast ou audiobook.
     @Override
     public void exibir() {
         System.out.println("\n1. Música\n2. Podcast\n3. Audiobook\nEscolha o tipo de mídia para adicionar:");
@@ -39,6 +39,7 @@ public class ISubmenuAdicionarMidia implements ISubmenu {
             System.out.println("Erro ao adicionar mídia: " + e.getMessage());
         }
     }
+//submenu responsavel pelas informações ao escolher adicionar uma musica
 
     private void adicionarMusica() throws Exception {
         System.out.print("Título: ");
@@ -62,6 +63,7 @@ public class ISubmenuAdicionarMidia implements ISubmenu {
         bibliotecaService.adicionarMusica(m);
         System.out.println("Música adicionada com sucesso!");
     }
+//submenu responsavel pelas informações ao escolher adicionar um podcast
 
     private void adicionarPodcast() throws Exception {
         System.out.print("Título do episódio: ");
@@ -89,7 +91,7 @@ public class ISubmenuAdicionarMidia implements ISubmenu {
         bibliotecaService.adicionarPodcast(p);
         System.out.println("Podcast adicionado com sucesso!");
     }
-
+//submenu responsavel pelas informações ao escolher adicionar um audiobook
     private void adicionarAudiobook() throws Exception {
         System.out.print("Título do capítulo: ");
         String titulo = scanner.nextLine();

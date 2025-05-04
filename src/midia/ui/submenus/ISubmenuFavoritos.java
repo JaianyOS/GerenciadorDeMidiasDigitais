@@ -11,7 +11,7 @@ public class ISubmenuFavoritos implements ISubmenu {
         this.bibliotecaService = bibliotecaService;
         this.scanner = scanner;
     }
-
+//adicionar uma midia como favorito.
     @Override
     public void exibir() {
         System.out.print("ID da mídia: ");
