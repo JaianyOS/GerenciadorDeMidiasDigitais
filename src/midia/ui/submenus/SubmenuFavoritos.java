@@ -1,0 +1,29 @@
+package midia.ui.submenus;
+
+import midia.interfaces.IBibliotecaService;
+import java.util.Scanner;
+
+public class SubmenuFavoritos implements Submenu {
+    private final IBibliotecaService bibliotecaService;
+    private final Scanner scanner;
+
+    public SubmenuFavoritos(IBibliotecaService bibliotecaService, Scanner scanner) {
+        this.bibliotecaService = bibliotecaService;
+        this.scanner = scanner;
+    }
+
+    @Override
+    public void exibir() {
+        System.out.print("ID da mídia: ");
+        String id = scanner.nextLine();
+        System.out.print("Marcar como favorito? (s/n): ");
+        String resp = scanner.nextLine();
+        boolean status = resp.equalsIgnoreCase("s");
+        try {
+            bibliotecaService.marcarMidiaComoFavorita(id, status);
+            System.out.println("Status de favorito atualizado!");
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+}

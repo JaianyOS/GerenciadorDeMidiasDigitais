@@ -126,8 +126,8 @@ public class BibliotecaService implements IBibliotecaService {
         if (p == null) throw new PlaylistNaoEncontradaException("Playlist não encontrada!");
         ArquivoMidia m = biblioteca.getTodasAsMidias().get(idMidia);
         if (m == null) throw new MidiaNaoEncontradaException("Mídia não encontrada!");
-        if (!p.getPlaylist().contains(m)) {
-            p.getPlaylist().add(m);
+        if (!p.getMidias().add(m)){
+            p.getMidias().add(m);
             salvarBiblioteca();
         }
     }
@@ -139,7 +139,7 @@ public class BibliotecaService implements IBibliotecaService {
         if (p == null) throw new PlaylistNaoEncontradaException("Playlist não encontrada!");
         ArquivoMidia m = biblioteca.getTodasAsMidias().get(idMidia);
         if (m == null) throw new MidiaNaoEncontradaException("Mídia não encontrada!");
-        p.getPlaylist().remove(m);
+        p.getMidias().remove(m);
         salvarBiblioteca();
     }
 

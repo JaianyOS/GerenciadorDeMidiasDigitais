@@ -1,49 +1,50 @@
 package midia.models;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Playlist {
     private String id;
     private String nome;
     private String descricao;
-    private List<ArquivoMidia> playlist;
+    private List<ArquivoMidia> midias;
 
-    public Playlist(String id, String nome, String descricao, List<ArquivoMidia> playlist) {
+    public Playlist(String nome, String descricao) {
+        this.id = UUID.randomUUID().toString();
+        this.nome = nome;
+        this.descricao = descricao;
+        this.midias = new ArrayList<>();
+    }
+
+    public Playlist(String id, String nome, String descricao, List<ArquivoMidia> midias) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.playlist = playlist;
+        this.midias = midias;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public List<ArquivoMidia> getMidias() {
+        return midias;
     }
 
-    public List<ArquivoMidia> getPlaylist() {
-        return playlist;
+    public void adicionarMidia(ArquivoMidia midia) {
+        midias.add(midia);
     }
 
-    public void setPlaylist(List<ArquivoMidia> playlist) {
-        this.playlist = playlist;
+    public void removerMidia(ArquivoMidia midia) {
+        midias.remove(midia);
     }
 }

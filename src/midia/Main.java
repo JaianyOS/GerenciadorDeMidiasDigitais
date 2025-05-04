@@ -1,3 +1,8 @@
+//Marcus Arthur Carvalho Luz - 12211BSI284
+//Jaiany Oliveira Silva - 12221BSI226
+//Samira Rodrigues Silva - 12311BSI203
+//Eduardo teodoro ferreira - 12011BSI286
+//Giovanna Vida Krempel - 12221BSI234
 package midia;
 
 import midia.interfaces.IBibliotecaService;
