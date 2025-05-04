@@ -40,7 +40,8 @@ public class AudiobookCapitulo extends ArquivoMidia {
 
     @Override
     public String getDetalhesExibicao() {
-        return String.format("AUDIOBOOK || 📗 Livro: %s (%s) | Cap. %d: %s | Duração: %s | Favorito: %s",
+        return String.format("ID: %s || AUDIOBOOK || 📗 Livro: %s (%s) | Cap. %d: %s | Duração: %s | Favorito: %s",
+                getId(),
                 nomeLivro,
                 nomeAutor,
                 numeroCapitulo,

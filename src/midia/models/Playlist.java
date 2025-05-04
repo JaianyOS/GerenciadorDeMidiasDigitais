@@ -17,7 +17,7 @@ public class Playlist implements Serializable {
     private List<ArquivoMidia> midias;
 
     public Playlist(String nome, String descricao) {
-        this.id = UUID.randomUUID().toString();
+        this.id = GeradorID.novoID();
         this.nome = nome;
         this.descricao = descricao;
         this.midias = new ArrayList<>();

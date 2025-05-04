@@ -24,8 +24,14 @@ public class PodcastEpisodio extends ArquivoMidia {
 
     @Override
     public String getDetalhesExibicao() {
-        return String.format("PODCAST | %s - Ep.%d: %s | Data: %s | %s | Favorito: %s",
-                nomePodcast, numeroEpisodio, getTitulo(), dataPublicacao, descricaoResumida, isFavorito() ? "Sim" : "Não");
+        return String.format("ID: %s || PODCAST || %s - Ep.%d: %s | Data: %s | %s | Favorito: %s",
+                getId(),
+                nomePodcast,
+                numeroEpisodio,
+                getTitulo(),
+                dataPublicacao,
+                descricaoResumida,
+                isFavorito() ? "Sim" : "Não");
     }
 
     @Override

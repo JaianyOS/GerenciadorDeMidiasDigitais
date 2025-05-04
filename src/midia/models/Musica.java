@@ -50,7 +50,8 @@ public class Musica extends ArquivoMidia {
 
     @Override
     public String getDetalhesExibicao() {
-        return String.format("MUSICA   | Título: %s | Artista: %s | Álbum: %s (%d) | Duração: %s | Favorito: %s",
+        return String.format("ID: %s || MUSICA || Título: %s | Artista: %s | Álbum: %s (%d) | Duração: %s | Favorito: %s",
+                getId(),
                 getTitulo(),
                 artista,
                 album,

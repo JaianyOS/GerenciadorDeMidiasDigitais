@@ -2,6 +2,7 @@ package midia.models;
 
 import midia.interfaces.IFavoritavel;
 import midia.interfaces.IReproduzivel;
+import midia.util.GeradorID;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -15,7 +16,7 @@ public abstract class ArquivoMidia implements IReproduzivel, IFavoritavel,Serial
     private boolean favorito;
 
     public ArquivoMidia(String id, String titulo, int duracaoSegundos, String caminhoArquivo, String formato, boolean favorito) {
-        this.id = UUID.randomUUID().toString();
+        this.id = GeradorID.novoID();
         this.titulo = titulo;
         this.duracaoSegundos = duracaoSegundos;
         this.caminhoArquivo = caminhoArquivo;
