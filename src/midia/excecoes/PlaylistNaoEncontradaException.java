@@ -1,4 +1,4 @@
 package midia.excecoes;
-
-public class PlaylistNaoEncontradaException {
+public class PlaylistNaoEncontradaException extends Exception {
+    public PlaylistNaoEncontradaException(String msg) { super(msg); }
 }

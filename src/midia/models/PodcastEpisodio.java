@@ -1,50 +1,35 @@
 package midia.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class PodcastEpisodio extends ArquivoMidia {
     private String nomePodcast;
     private int numeroEpisodio;
-    private LocalDateTime dataEpisodio;
-    private String descricao;
+    private LocalDate dataPublicacao;
+    private String descricaoResumida;
 
-    public PodcastEpisodio(String id, String titulo, int duracaoSegundos, String caminhoArquivo, String formato, boolean favorito, String nomePodcast, int numeroEpisodio, LocalDateTime dataEpisodio, String descricao) {
+    public PodcastEpisodio(String id, String titulo, int duracaoSegundos, String caminhoArquivo, String formato, boolean favorito,
+                           String nomePodcast, int numeroEpisodio, LocalDate dataPublicacao, String descricaoResumida) {
         super(id, titulo, duracaoSegundos, caminhoArquivo, formato, favorito);
         this.nomePodcast = nomePodcast;
         this.numeroEpisodio = numeroEpisodio;
-        this.dataEpisodio = dataEpisodio;
-        this.descricao = descricao;
+        this.dataPublicacao = dataPublicacao;
+        this.descricaoResumida = descricaoResumida;
     }
 
-    public String getNomePodcast() {
-        return nomePodcast;
+    @Override
+    public void play() {
+        System.out.printf("▶️ Tocando podcast: %s - Episódio %d: %s%n", nomePodcast, numeroEpisodio, getTitulo());
     }
 
-    public void setNomePodcast(String nomePodcast) {
-        this.nomePodcast = nomePodcast;
+    @Override
+    public String getDetalhesExibicao() {
+        return String.format("PODCAST | %s - Ep.%d: %s | Data: %s | %s | Favorito: %s",
+                nomePodcast, numeroEpisodio, getTitulo(), dataPublicacao, descricaoResumida, isFavorito() ? "Sim" : "Não");
     }
 
-    public int getNumeroEpisodio() {
-        return numeroEpisodio;
-    }
-
-    public void setNumeroEpisodio(int numeroEpisodio) {
-        this.numeroEpisodio = numeroEpisodio;
-    }
-
-    public LocalDateTime getDataEpisodio() {
-        return dataEpisodio;
-    }
-
-    public void setDataEpisodio(LocalDateTime dataEpisodio) {
-        this.dataEpisodio = dataEpisodio;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    @Override
+    public String toString() {
+        return getDetalhesExibicao();
     }
 }
